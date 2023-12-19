@@ -11,7 +11,7 @@ public class MouseEvent {
     private static final long SHORT_DELAY = 500;
     private static final long MEDIUM_DELAY = 2000;
     private static final long LONG_DELAY = 1500;
-    private static final long VERY_LONG_DELAY= 5000;
+    private static final long VERY_LONG_DELAY= 2000;
 
     private final MouseAction mouseAction;
 

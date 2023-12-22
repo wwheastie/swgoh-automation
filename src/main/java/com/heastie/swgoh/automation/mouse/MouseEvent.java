@@ -47,6 +47,21 @@ public class MouseEvent {
         mouseAction.releaseLeftButton(MEDIUM_DELAY);
     }
 
+    public void dragShortUp(final Point currentPosition) {
+        mouseAction.moveCursor(currentPosition, LONG_DELAY);
+        mouseAction.pressLeftButton(VERY_SHORT_DELAY);
+        decrementShortUp(currentPosition);
+        mouseAction.releaseLeftButton(MEDIUM_DELAY);
+    }
+
+    public void dragShortDown(final Point currentPosition) {
+        mouseAction.moveCursor(currentPosition, LONG_DELAY);
+        mouseAction.pressLeftButton(VERY_SHORT_DELAY);
+        decrementShortDown(currentPosition);
+        mouseAction.releaseLeftButton(MEDIUM_DELAY);
+    }
+
+
     public void moveCursorLeftClick(final Point position) {
         mouseAction.moveCursor(position, SHORT_DELAY);
         mouseAction.leftClick(VERY_LONG_DELAY);
@@ -109,6 +124,26 @@ public class MouseEvent {
             } else {
                 x = x / 2;
             }
+            mouseAction.moveCursor(new Point(x, y), INSTANT_DELAY);
+        }
+    }
+
+    private void decrementShortUp(final Point currentPosition) {
+        int x = currentPosition.x;
+        int y = currentPosition.y;
+        int stop = y + 700;
+        while(y < stop) {
+            y += 5;
+            mouseAction.moveCursor(new Point(x, y), INSTANT_DELAY);
+        }
+    }
+
+    private void decrementShortDown(final Point currentPosition) {
+        int x = currentPosition.x;
+        int y = currentPosition.y;
+        int stop = y - 700;
+        while(y > stop) {
+            y -= 5;
             mouseAction.moveCursor(new Point(x, y), INSTANT_DELAY);
         }
     }

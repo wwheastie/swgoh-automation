@@ -8,6 +8,7 @@ import com.heastie.swgoh.automation.simulator.arena.SquadArenaBattle;
 import com.heastie.swgoh.automation.simulator.challenge.FleetChallenges;
 import com.heastie.swgoh.automation.simulator.challenge.RegularChallenges;
 import com.heastie.swgoh.automation.simulator.galactic.GalacticWar;
+import com.heastie.swgoh.automation.simulator.management.AccountManagement;
 import com.heastie.swgoh.automation.simulator.shard.DarkSideBattles;
 import com.heastie.swgoh.automation.simulator.shard.FleetBattles;
 import com.heastie.swgoh.automation.simulator.shard.LightSideBattles;
@@ -38,6 +39,7 @@ public class MainAccount implements CommandLineRunner {
     private final GalacticWar galacticWar;
     private final FleetArenaBattle fleetArenaBattle;
     private final SquadArenaBattle squadArenaBattle;
+    private final AccountManagement accountManagement;
 
     public MainAccount(final MouseEvent mouseEvent, final ShardBattlesScript shardBattlesScript,
         final DarkSideBattles darkSideBattles, final FleetBattles fleetBattles,
@@ -47,7 +49,8 @@ public class MainAccount implements CommandLineRunner {
         final SharedScript sharedScript,
         final GalacticWar galacticWar,
         final FleetArenaBattle fleetArenaBattle,
-        final SquadArenaBattle squadArenaBattle) {
+        final SquadArenaBattle squadArenaBattle,
+        final AccountManagement accountManagement) {
         this.mouseEvent = mouseEvent;
         this.shardBattlesScript = shardBattlesScript;
         this.darkSideBattles = darkSideBattles;
@@ -60,21 +63,11 @@ public class MainAccount implements CommandLineRunner {
         this.galacticWar = galacticWar;
         this.fleetArenaBattle = fleetArenaBattle;
         this.squadArenaBattle = squadArenaBattle;
+        this.accountManagement = accountManagement;
     }
 
     @Override
     public void run(final String... args) throws Exception {
-//        System.out.println("Daily objectives run started!");
-//        restartApplication();
-//        simulateRegularBattles();
-//        simulateFleetBattles();
-//        fleetChallenges.automate();
-//        regularChallenges.automate();
-//        galacticWar.automate();
-//        squadArenaBattle.automate();
-//        fleetArenaBattle.automate();
-//        stopApplication();
-//        System.out.println("Daily objectives run complete");
     }
 
     @Scheduled(cron = EVERY_DAY_6_30_CRON_JOB, zone = CENTRAL_TIME_ZONE)
@@ -102,13 +95,11 @@ public class MainAccount implements CommandLineRunner {
     }
 
     private void simulateRegularBattles() {
-        battleEnergy.purchaseRegularEnergy(3);
+        battleEnergy.purchaseRegularEnergy(2);
 
         lightSideBattles.automate(Arrays.asList(
-            // Skiff Guard
-            new Shard(3, "B", 0),
-            // Wrecker
-            new Shard(7, "C", 0),
+            // Zorii Bliss
+            new Shard(5, "E", 0),
             // Cere Junda
             new Shard(3, "A", 0),
             // Saw Gerrera
@@ -116,22 +107,20 @@ public class MainAccount implements CommandLineRunner {
         ));
 
         darkSideBattles.automate(Arrays.asList(
-            // Jawa
-            new Shard(4, "F", 0),
-            // Embo
-            new Shard(8, "C", 0),
+            // Captain Rex
+            new Shard(3, "F", 0),
             // Tarfful
             new Shard(4, "D", 0)
         ));
     }
 
     private void simulateFleetBattles() {
-        battleEnergy.purchaseShipEnergy(3);
+        battleEnergy.purchaseShipEnergy(2);
         fleetBattles.automate(Arrays.asList(
             // Outrider
-            new Shard(3, "C", 1),
+            new Shard(3, "C", 0),
             // Rebel Y-Wing
-            new Shard(4, "C", 1),
+            new Shard(4, "C", 0),
             // Bistan's U-Wing
             new Shard(2, "C", 0)
         ));

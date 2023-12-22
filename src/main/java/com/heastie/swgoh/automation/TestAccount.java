@@ -8,6 +8,7 @@ import com.heastie.swgoh.automation.simulator.arena.SquadArenaBattle;
 import com.heastie.swgoh.automation.simulator.challenge.FleetChallenges;
 import com.heastie.swgoh.automation.simulator.challenge.RegularChallenges;
 import com.heastie.swgoh.automation.simulator.galactic.GalacticWar;
+import com.heastie.swgoh.automation.simulator.mods.Mods;
 import com.heastie.swgoh.automation.simulator.shard.DarkSideBattles;
 import com.heastie.swgoh.automation.simulator.shard.FleetBattles;
 import com.heastie.swgoh.automation.simulator.shard.LightSideBattles;
@@ -37,6 +38,7 @@ public class TestAccount implements CommandLineRunner {
     private final GalacticWar galacticWar;
     private final FleetArenaBattle fleetArenaBattle;
     private final SquadArenaBattle squadArenaBattle;
+    private final Mods mods;
 
     public TestAccount(final MouseEvent mouseEvent, final ShardBattlesScript shardBattlesScript,
         final DarkSideBattles darkSideBattles, final FleetBattles fleetBattles,
@@ -46,7 +48,8 @@ public class TestAccount implements CommandLineRunner {
         final SharedScript sharedScript,
         final GalacticWar galacticWar,
         final FleetArenaBattle fleetArenaBattle,
-        final SquadArenaBattle squadArenaBattle) {
+        final SquadArenaBattle squadArenaBattle,
+        final Mods mods) {
         this.mouseEvent = mouseEvent;
         this.shardBattlesScript = shardBattlesScript;
         this.darkSideBattles = darkSideBattles;
@@ -59,14 +62,11 @@ public class TestAccount implements CommandLineRunner {
         this.galacticWar = galacticWar;
         this.fleetArenaBattle = fleetArenaBattle;
         this.squadArenaBattle = squadArenaBattle;
+        this.mods = mods;
     }
 
     @Override
     public void run(final String... args) throws Exception {
-//        restartApplication();
-//        squadArenaBattle.automate();
-//        fleetArenaBattle.automate();
-//        stopApplication();
     }
 
     private void fullAutomation() throws Exception {
@@ -74,9 +74,9 @@ public class TestAccount implements CommandLineRunner {
         restartApplication();
         simulateRegularBattles();
         simulateFleetBattles();
-//        fleetChallenges.automate();
+        fleetChallenges.automate();
         regularChallenges.automate();
-//        galacticWar.automate();
+        galacticWar.automate();
         stopApplication();
         System.out.println("Daily objectives run complete");
     }

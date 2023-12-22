@@ -22,6 +22,10 @@ public class KeyboardEvent {
         }
     }
 
+    public void backspace() {
+        doType(VK_BACK_SPACE);
+    }
+
     public void type(char character) {
         switch (character) {
             case 'a': doType(VK_A); break;

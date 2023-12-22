@@ -22,6 +22,17 @@ public class Mods {
         }
     }
 
+    public void deleteFilters() {
+        for(int i = 0; i < 20; i++) {
+            // Click on filter
+            mouseEvent.moveCursorLeftClick(new Point(300, 290));
+            // Click delete button
+            mouseEvent.moveCursorLeftClick(new Point(480, 290));
+            // Click confirm
+            mouseEvent.moveCursorLeftClick(new Point(1160, 670));
+        }
+    }
+
     private void createFilter(final String input) {
         // Click Reset to Default
         mouseEvent.moveCursorLeftClick(new Point(710, 920));

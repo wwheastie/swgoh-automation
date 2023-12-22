@@ -9,6 +9,7 @@ import com.heastie.swgoh.automation.simulator.challenge.FleetChallenges;
 import com.heastie.swgoh.automation.simulator.challenge.RegularChallenges;
 import com.heastie.swgoh.automation.simulator.galactic.GalacticWar;
 import com.heastie.swgoh.automation.simulator.management.AccountManagement;
+import com.heastie.swgoh.automation.simulator.mods.Mods;
 import com.heastie.swgoh.automation.simulator.shard.DarkSideBattles;
 import com.heastie.swgoh.automation.simulator.shard.FleetBattles;
 import com.heastie.swgoh.automation.simulator.shard.LightSideBattles;
@@ -40,6 +41,7 @@ public class MainAccount implements CommandLineRunner {
     private final FleetArenaBattle fleetArenaBattle;
     private final SquadArenaBattle squadArenaBattle;
     private final AccountManagement accountManagement;
+    private final Mods mods;
 
     public MainAccount(final MouseEvent mouseEvent, final ShardBattlesScript shardBattlesScript,
         final DarkSideBattles darkSideBattles, final FleetBattles fleetBattles,
@@ -50,7 +52,8 @@ public class MainAccount implements CommandLineRunner {
         final GalacticWar galacticWar,
         final FleetArenaBattle fleetArenaBattle,
         final SquadArenaBattle squadArenaBattle,
-        final AccountManagement accountManagement) {
+        final AccountManagement accountManagement,
+        final Mods mods) {
         this.mouseEvent = mouseEvent;
         this.shardBattlesScript = shardBattlesScript;
         this.darkSideBattles = darkSideBattles;
@@ -64,10 +67,12 @@ public class MainAccount implements CommandLineRunner {
         this.fleetArenaBattle = fleetArenaBattle;
         this.squadArenaBattle = squadArenaBattle;
         this.accountManagement = accountManagement;
+        this.mods = mods;
     }
 
     @Override
     public void run(final String... args) throws Exception {
+
     }
 
     @Scheduled(cron = EVERY_DAY_6_30_CRON_JOB, zone = CENTRAL_TIME_ZONE)

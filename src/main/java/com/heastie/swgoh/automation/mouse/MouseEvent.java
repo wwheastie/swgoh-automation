@@ -50,14 +50,28 @@ public class MouseEvent {
     public void dragShortUp(final Point currentPosition) {
         mouseAction.moveCursor(currentPosition, LONG_DELAY);
         mouseAction.pressLeftButton(VERY_SHORT_DELAY);
-        decrementShortUp(currentPosition);
+        decrementShortUp(currentPosition, 700);
+        mouseAction.releaseLeftButton(MEDIUM_DELAY);
+    }
+
+    public void dragShortUp(final Point currentPosition, final int dragUpLength) {
+        mouseAction.moveCursor(currentPosition, LONG_DELAY);
+        mouseAction.pressLeftButton(VERY_SHORT_DELAY);
+        decrementShortUp(currentPosition, dragUpLength);
         mouseAction.releaseLeftButton(MEDIUM_DELAY);
     }
 
     public void dragShortDown(final Point currentPosition) {
         mouseAction.moveCursor(currentPosition, LONG_DELAY);
         mouseAction.pressLeftButton(VERY_SHORT_DELAY);
-        decrementShortDown(currentPosition);
+        decrementShortDown(currentPosition, 700);
+        mouseAction.releaseLeftButton(MEDIUM_DELAY);
+    }
+
+    public void dragShortDown(final Point currentPosition, final int dragDownLength) {
+        mouseAction.moveCursor(currentPosition, LONG_DELAY);
+        mouseAction.pressLeftButton(VERY_SHORT_DELAY);
+        decrementShortDown(currentPosition, dragDownLength);
         mouseAction.releaseLeftButton(MEDIUM_DELAY);
     }
 
@@ -128,20 +142,20 @@ public class MouseEvent {
         }
     }
 
-    private void decrementShortUp(final Point currentPosition) {
+    private void decrementShortUp(final Point currentPosition, final int dragUpLength) {
         int x = currentPosition.x;
         int y = currentPosition.y;
-        int stop = y + 700;
+        int stop = y + dragUpLength;
         while(y < stop) {
             y += 5;
             mouseAction.moveCursor(new Point(x, y), INSTANT_DELAY);
         }
     }
 
-    private void decrementShortDown(final Point currentPosition) {
+    private void decrementShortDown(final Point currentPosition, final int dragDownLength) {
         int x = currentPosition.x;
         int y = currentPosition.y;
-        int stop = y - 700;
+        int stop = y - dragDownLength;
         while(y > stop) {
             y -= 5;
             mouseAction.moveCursor(new Point(x, y), INSTANT_DELAY);

@@ -9,6 +9,14 @@ import com.heastie.swgoh.automation.simulator.challenge.FleetChallenges;
 import com.heastie.swgoh.automation.simulator.challenge.RegularChallenges;
 import com.heastie.swgoh.automation.simulator.galactic.GalacticWar;
 import com.heastie.swgoh.automation.simulator.management.AccountManagement;
+import com.heastie.swgoh.automation.simulator.mods.FilterOptions;
+import com.heastie.swgoh.automation.simulator.mods.LevelEnum;
+import com.heastie.swgoh.automation.simulator.mods.LevelOption;
+import com.heastie.swgoh.automation.simulator.mods.ModFiltersEnum.PRIMARY_STAT;
+import com.heastie.swgoh.automation.simulator.mods.ModFiltersEnum.RARITY;
+import com.heastie.swgoh.automation.simulator.mods.ModFiltersEnum.SET;
+import com.heastie.swgoh.automation.simulator.mods.ModFiltersEnum.SLOT;
+import com.heastie.swgoh.automation.simulator.mods.ModFiltersEnum.TIER;
 import com.heastie.swgoh.automation.simulator.mods.Mods;
 import com.heastie.swgoh.automation.simulator.shard.DarkSideBattles;
 import com.heastie.swgoh.automation.simulator.shard.FleetBattles;
@@ -18,6 +26,7 @@ import com.heastie.swgoh.automation.simulator.store.BattleEnergy;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -72,7 +81,14 @@ public class MainAccount implements CommandLineRunner {
 
     @Override
     public void run(final String... args) throws Exception {
-
+        FilterOptions filterOptions = new FilterOptions();
+        filterOptions.setModSlots(Arrays.asList(SLOT.SQUARE, SLOT.TRIANGLE, SLOT.DIAMOND));
+        filterOptions.setModSets(Arrays.asList(SET.HEALTH, SET.SPEED, SET.OFFENSE));
+        filterOptions.setPrimaryStats(Arrays.asList(PRIMARY_STAT.ACCURACY, PRIMARY_STAT.CRIT_CHANCE, PRIMARY_STAT.SPEED, PRIMARY_STAT.TENACITY));
+        filterOptions.setLevelOption(new LevelOption(LevelEnum.LESS_THAN, 15));
+        filterOptions.setRarity(RARITY.MK_V);
+        filterOptions.setTiers(Arrays.asList(TIER.GREY, TIER.BLUE, TIER.PURPLE, TIER.GOLD));
+        mods.createFilter(Collections.singletonList(filterOptions));
     }
 
     @Scheduled(cron = EVERY_DAY_6_30_CRON_JOB, zone = CENTRAL_TIME_ZONE)

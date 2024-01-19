@@ -45,7 +45,7 @@ public class ShardBattlesScript {
         shiftTabs(shard);
         clickTab(shard);
         clickHardButton();
-        resetTable(shardType);
+        resetTable(shard, shardType);
         clickCharacterNode(shard, shardType);
         simulateShards();
         reSimulateShards(shard);
@@ -71,15 +71,18 @@ public class ShardBattlesScript {
         mouseEvent.moveCursorLeftClick(Coordinates.HARD_BUTTON);
     }
 
-    private void resetTable(final ShardType shardType) {
+    private void resetTable(final Shard shard, final ShardType shardType) {
         mouseEvent.dragFarLeft(Coordinates.RESET_TABLE_DRAG_POINT_ONE);
+        final Point point;
         if (ShardType.CHARACTER.equals(shardType)) {
-            mouseEvent.moveCursorLeftClick(Coordinates.RESET_TABLE_FIRST_CHARACTER_NODE_FIRST_CLICK);
-            mouseEvent.moveCursorLeftClick(Coordinates.RESET_TABLE_FIRST_CHARACTER_NODE_SECOND_CLICK);
+            point = shard.getNode().equalsIgnoreCase("A") ? new Point(935, 565) :
+                Coordinates.RESET_TABLE_FIRST_CHARACTER_NODE_FIRST_CLICK;
         } else {
-            mouseEvent.moveCursorLeftClick(new Point(615, 470));
-            mouseEvent.moveCursorLeftClick(new Point(615, 470));
+            point = shard.getNode().equalsIgnoreCase("A") ? new Point(760, 605) :
+                new Point(615, 470);
         }
+        mouseEvent.moveCursorLeftClick(point);
+        mouseEvent.moveCursorLeftClick(point);
         mouseEvent.dragFarLeft(Coordinates.RESET_TABLE_DRAG_POINT_TWO);
         mouseEvent.dragShortRight(Coordinates.CENTER_TABLE_DRAG_POINT);
     }

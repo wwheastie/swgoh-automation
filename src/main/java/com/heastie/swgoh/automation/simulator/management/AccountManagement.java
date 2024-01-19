@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AccountManagement {
-    private static final List<String> TAB_NAMES = Arrays.asList("Current Plan", "Farming", "Relics", "Zetas", "Teams to Build",
-        "Current Teams", "General", "GAC 5v5", "GAC 3v3", "Conquest", "Territory Wars", "Territory Battles", "Guild Raid",
-        "Future Plans", "Phase I", "Farming", "Relics", "Zetas", "Teams to Build");
+    private static final List<String> TAB_NAMES = Arrays.asList("ll Current Plan ll", "Battles", "Shops", "Mods", "Relics", "Zetas", "Teams to Build",
+        "ll Current Teams ll", "Best Teams", "GAC 5v5", "GAC 3v3", "Conquest", "Territory Wars", "Territory Battles", "Guild Raid",
+        "ll Future Plans ll", "Phase I", "Farms", "Relics", "Zetas", "Teams to Build");
 
     private final MouseEvent mouseEvent;
     private final KeyboardEvent keyboardEvent;
@@ -49,7 +49,14 @@ public class AccountManagement {
 
 //        // Slot 5 start
 //        int startYPosition = 435;
-        for(int i = 12; i < TAB_NAMES.size(); i++) {
+        mouseEvent.dragShortDown(new Point(230, startYPosition));
+
+        for(int i = 13; i < TAB_NAMES.size(); i++) {
+            if (i % 5 == 0) {
+                mouseEvent.dragShortDown(new Point(230, startYPosition));
+                startYPosition = 410;
+            }
+
             createTab(TAB_NAMES.get(i), startYPosition);
             // New tab position shifts down
             startYPosition += 85;
